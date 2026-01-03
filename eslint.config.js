@@ -44,6 +44,7 @@ export default defineConfig([
       'react-refresh/only-export-components': 'warn',
       'react/react-in-jsx-scope': 'off',
       'react/self-closing-comp': 'warn',
+      // 'react/prop-types': 'off', // Disable prop-types as we use TypeScript
       'no-console': 'error',
       'no-unused-vars': ['error', { argsIgnorePattern: '^_', args: 'none' }],
       'import/order': [
