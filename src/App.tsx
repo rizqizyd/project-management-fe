@@ -1,12 +1,9 @@
-import {
-  Box,
-  createTheme,
-  CssBaseline,
-  ThemeProvider,
-  Typography,
-} from '@mui/material';
-import { createBrowserRouter, Link, RouterProvider } from 'react-router';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 
+import Login from './components/page/Auth/Login';
 import Dashboard from './components/page/Dashboard/Dashboard';
 
 const theme = createTheme({
@@ -48,20 +45,17 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: (
-      <Box>
-        <Typography variant="h1">Login</Typography>
-        <Link to={'/'}>Home</Link>
-      </Box>
-    ),
+    element: <Login />,
   },
 ]);
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <RouterProvider router={router} />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </LocalizationProvider>
     </ThemeProvider>
   );
 }
