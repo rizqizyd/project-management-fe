@@ -1,8 +1,8 @@
 import { Settings } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
-import Avatar from '../../../ui/Avatar';
-import Dropdown from '../../../ui/Dropdown';
+import Avatar from '@/components/ui/Avatar';
+import Dropdown from '@/components/ui/Dropdown';
 
 const DetailProject = () => {
   return (

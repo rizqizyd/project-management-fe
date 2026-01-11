@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material';
 import { useState } from 'react';
 
-import Modal from '../../ui/Modal';
+import Modal from '@/components/ui/Modal';
 
 const Dashboard = () => {
   const [openModal, setOpenModal] = useState(false);

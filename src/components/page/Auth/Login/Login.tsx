@@ -1,9 +1,9 @@
 import { Paper, Stack } from '@mui/material';
 import { useForm } from 'react-hook-form';
 
-import DatePicker from '../../../ui/Form/DatePicker';
-import Select from '../../../ui/Form/Select/Select';
-import TextField from '../../../ui/Form/TextField';
+import DatePicker from '@/components/ui/Form/DatePicker';
+import Select from '@/components/ui/Form/Select/Select';
+import TextField from '@/components/ui/Form/TextField';
 
 const Login = () => {
   const { control } = useForm();
