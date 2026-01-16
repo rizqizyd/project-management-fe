@@ -1,10 +1,14 @@
 import { AccountCircle } from '@mui/icons-material';
 import { Box, Stack } from '@mui/material';
 import { grey } from '@mui/material/colors';
+import { useNavigate } from 'react-router';
 
 import Dropdown from '@/components/ui/Dropdown';
+import session from '@/utils/session';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -25,14 +29,17 @@ const Navbar = () => {
             {
               label: 'Profile',
               onClick() {
-                console.log('handle navigate to profile');
+                navigate('/profile');
               },
+              value: 'profile',
             },
             {
               label: 'Logout',
               onClick() {
-                console.log('handle logout');
+                session.clearSession();
+                navigate('/login');
               },
+              value: 'logout',
             },
           ]}
         />

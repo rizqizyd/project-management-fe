@@ -1,38 +1,24 @@
-import { Settings } from '@mui/icons-material';
-import { Stack } from '@mui/material';
+import { colors, Paper, Typography } from '@mui/material';
 
-import Avatar from '@/components/ui/Avatar';
-import Dropdown from '@/components/ui/Dropdown';
+import SidebarLayout from '@/components/layouts/SidebarLayout';
+
+const breadcrumbs = [
+  { label: 'Projects', href: '/projects' },
+  { label: 'Detail Project', href: '/projects/detail' },
+];
 
 const DetailProject = () => {
   return (
-    <Stack
-      sx={{
-        height: '100vh',
-        width: '100%',
-      }}
-      justifyContent={'center'}
-      alignItems={'center'}
-      direction="row"
-      spacing={2}
-    >
-      <Avatar text="John Doe" onClick={() => {}} />
-      <Dropdown
-        icon={<Settings />}
-        options={[
-          {
-            value: 'close-project',
-            label: 'Close Project',
-            onClick: () => {},
-          },
-          {
-            value: 'change-deadline',
-            label: 'Change Deadline',
-            onClick: () => {},
-          },
-        ]}
-      />
-    </Stack>
+    <SidebarLayout pageTitle="Detail Project" breadcrumbs={breadcrumbs}>
+      <Paper
+        sx={{
+          padding: 2,
+          background: colors.lightBlue[100],
+        }}
+      >
+        <Typography>Shows Detail Project</Typography>
+      </Paper>
+    </SidebarLayout>
   );
 };
 

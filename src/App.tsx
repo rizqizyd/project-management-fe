@@ -3,9 +3,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 
+import authLoader from './components/layouts/AuthLayout/AuthLayout.loader';
+import sidebarLoader from './components/layouts/SidebarLayout/SidebarLayout.loader';
 import Login from './components/page/Auth/Login';
 import Dashboard from './components/page/Dashboard/Dashboard';
 import DetailProject from './components/page/Projects/DetailProject';
+import Projects from './components/page/Projects';
 
 const theme = createTheme({
   typography: {
@@ -42,14 +45,22 @@ const theme = createTheme({
 const router = createBrowserRouter([
   {
     path: '/',
+    loader: sidebarLoader,
     element: <Dashboard />,
   },
   {
     path: '/login',
+    loader: authLoader,
     element: <Login />,
   },
   {
+    path: '/projects',
+    loader: sidebarLoader,
+    element: <Projects />,
+  },
+  {
     path: '/projects/:id',
+    loader: sidebarLoader,
     element: <DetailProject />,
   },
 ]);

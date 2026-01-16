@@ -7,7 +7,7 @@ import Sidebar from './Sidebar';
 interface SidebarLayoutProps {
   children: React.ReactNode;
   pageTitle: string;
-  breadcrumbs: { label: string; href: string }[];
+  breadcrumbs?: { label: string; href: string }[];
 }
 
 const SidebarLayout = ({
@@ -60,7 +60,12 @@ const SidebarLayout = ({
         }}
       >
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
-          <Link underline="hover" color="inherit" href="/">
+          <Link
+            underline="hover"
+            color="inherit"
+            sx={{ cursor: 'pointer' }}
+            onClick={() => navigate('/')}
+          >
             Home
           </Link>
           {renderBreadcrumbs()}

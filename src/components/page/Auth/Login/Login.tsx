@@ -1,48 +1,59 @@
-import { Paper, Stack } from '@mui/material';
+import { Button, Paper, Stack, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
 
-import DatePicker from '@/components/ui/Form/DatePicker';
-import Select from '@/components/ui/Form/Select/Select';
-import TextField from '@/components/ui/Form/TextField';
+import AuthLayout from '@/components/layouts/AuthLayout';
+import TextField from '@/components/ui/Form/TextField/TextField';
+import session from '@/utils/session';
 
 const Login = () => {
-  const { control } = useForm();
+  const navigate = useNavigate();
+
+  const { control, handleSubmit } = useForm<{
+    email: string;
+    password: string;
+  }>();
+
+  const onSubmit = (formValues: { email: string; password: string }) => {
+    // eslint-disable-next-line no-console
+    console.log(formValues);
+    session.setSession('dummy-token');
+    navigate('/');
+  };
 
   return (
-    <Stack
-      spacing={2}
-      alignItems={'center'}
-      justifyContent={'center'}
-      height={'100vh'}
-    >
-      <Paper sx={{ width: 600, padding: 2 }}>
-        <DatePicker
-          control={control}
-          label="Choose Date"
-          name="filterDate"
-          defaultValue={null}
-        />
-        <TextField
-          control={control}
-          label="Username"
-          name="username"
-          defaultValue=""
-          helperText=""
-        />
-        <Select
-          control={control}
-          label="Role"
-          name="role"
-          id="role"
-          options={[
-            { label: 'Admin', value: 'admin' },
-            { label: 'User', value: 'user' },
-          ]}
-          defaultValue=""
-          value={''}
-        />
+    <AuthLayout>
+      <Paper sx={{ width: 500, padding: 2 }}>
+        <Typography
+          variant="h5"
+          component={'h1'}
+          align="center"
+          marginBottom={2}
+        >
+          Login Page
+        </Typography>
+        <Stack
+          flexDirection={'column'}
+          gap={1}
+          component={'form'}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <TextField label="Email" control={control} name="email" />
+          <TextField label="Password" control={control} name="password" />
+          <Button type="submit" variant="contained" fullWidth>
+            Login
+          </Button>
+          <Button
+            type="button"
+            variant="text"
+            fullWidth
+            onClick={() => navigate('/signup')}
+          >
+            Register
+          </Button>
+        </Stack>
       </Paper>
-    </Stack>
+    </AuthLayout>
   );
 };
 

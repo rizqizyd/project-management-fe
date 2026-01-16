@@ -1,27 +1,33 @@
 import { TextField as BaseTextField, Box } from '@mui/material';
-import { type Control, Controller, type FieldValues } from 'react-hook-form';
+import {
+  type Control,
+  Controller,
+  type FieldValues,
+  type Path,
+  type PathValue,
+} from 'react-hook-form';
 
-interface TextFieldProps {
-  name: string;
+interface TextFieldProps<T extends FieldValues> {
+  name: Path<T>;
   label: string;
-  control: Control<FieldValues>;
-  defaultValue: string | number;
-  helperText: string;
+  control: Control<T>;
+  helperText?: string;
+  defaultValue?: PathValue<T, Path<T>>;
 }
 
-const TextField = ({
+const TextField = <T extends FieldValues>({
   name,
   label,
   control,
   defaultValue,
   helperText,
   ...props
-}: TextFieldProps) => {
+}: TextFieldProps<T>) => {
   return (
     <Controller
       name={name}
       control={control}
-      defaultValue={defaultValue}
+      defaultValue={defaultValue as PathValue<T, Path<T>>}
       render={({ field: { onChange, onBlur, value } }) => (
         <Box
           sx={{
