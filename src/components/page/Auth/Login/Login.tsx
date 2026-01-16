@@ -8,15 +8,22 @@ import TextField from '@/components/ui/Form/TextField/TextField';
 import services from '@/services';
 import session from '@/utils/session';
 
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+export const loginSchema = yup.object({
+  email: yup.string().required().email(),
+  password: yup.string().required(),
+});
+
 const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm<{
-    email: string;
-    password: string;
-  }>();
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
 
   const onSubmit = async (formValues: { email: string; password: string }) => {
     try {
@@ -49,8 +56,14 @@ const Login = () => {
           component={'form'}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextField label="Email" control={control} name="email" />
-          <TextField label="Password" control={control} name="password" />
+          <TextField id="email" label="Email" control={control} name="email" />
+          <TextField
+            id="password"
+            label="Password"
+            control={control}
+            name="password"
+            secureText
+          />
           <Button
             type="submit"
             variant="contained"
