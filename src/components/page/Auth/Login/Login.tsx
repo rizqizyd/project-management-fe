@@ -1,19 +1,21 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Paper, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
+import * as yup from 'yup';
 
 import AuthLayout from '@/components/layouts/AuthLayout';
 import TextField from '@/components/ui/Form/TextField/TextField';
 import services from '@/services';
 import session from '@/utils/session';
 
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
-export const loginSchema = yup.object({
-  email: yup.string().required().email(),
-  password: yup.string().required(),
+const loginSchema = yup.object({
+  email: yup
+    .string()
+    .required('Email is required')
+    .email('Invalid email format'),
+  password: yup.string().required('Password is required'),
 });
 
 const Login = () => {
