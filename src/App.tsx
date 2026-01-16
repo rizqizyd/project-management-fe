@@ -7,8 +7,8 @@ import authLoader from './components/layouts/AuthLayout/AuthLayout.loader';
 import sidebarLoader from './components/layouts/SidebarLayout/SidebarLayout.loader';
 import Login from './components/page/Auth/Login';
 import Dashboard from './components/page/Dashboard/Dashboard';
-import DetailProject from './components/page/Projects/DetailProject';
 import Projects from './components/page/Projects';
+import DetailProject from './components/page/Projects/DetailProject';
 
 const theme = createTheme({
   typography: {

@@ -1,12 +1,16 @@
 import { Button, Paper, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
 import AuthLayout from '@/components/layouts/AuthLayout';
 import TextField from '@/components/ui/Form/TextField/TextField';
+import services from '@/services';
 import session from '@/utils/session';
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const { control, handleSubmit } = useForm<{
@@ -14,11 +18,18 @@ const Login = () => {
     password: string;
   }>();
 
-  const onSubmit = (formValues: { email: string; password: string }) => {
-    // eslint-disable-next-line no-console
-    console.log(formValues);
-    session.setSession('dummy-token');
-    navigate('/');
+  const onSubmit = async (formValues: { email: string; password: string }) => {
+    try {
+      const response = await services.auth.login(formValues);
+      const { data } = response.data;
+      session.setSession(data.access_token);
+      navigate('/');
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('error', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -40,7 +51,12 @@ const Login = () => {
         >
           <TextField label="Email" control={control} name="email" />
           <TextField label="Password" control={control} name="password" />
-          <Button type="submit" variant="contained" fullWidth>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            disabled={loading}
+          >
             Login
           </Button>
           <Button
@@ -48,6 +64,7 @@ const Login = () => {
             variant="text"
             fullWidth
             onClick={() => navigate('/signup')}
+            disabled={loading}
           >
             Register
           </Button>
