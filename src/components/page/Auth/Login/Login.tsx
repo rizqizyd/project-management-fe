@@ -66,12 +66,7 @@ const Login = () => {
             name="password"
             secureText
           />
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            disabled={loading}
-          >
+          <Button type="submit" variant="contained" fullWidth loading={loading}>
             Login
           </Button>
           <Button

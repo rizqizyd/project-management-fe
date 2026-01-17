@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import authLoader from './components/layouts/AuthLayout/AuthLayout.loader';
 import sidebarLoader from './components/layouts/SidebarLayout/SidebarLayout.loader';
 import Login from './components/page/Auth/Login';
+import SignUp from './components/page/Auth/Signup';
 import Dashboard from './components/page/Dashboard/Dashboard';
 import Projects from './components/page/Projects';
 import DetailProject from './components/page/Projects/DetailProject';
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
     path: '/projects/:id',
     loader: sidebarLoader,
     element: <DetailProject />,
+  },
+  {
+    path: '/signup',
+    loader: authLoader,
+    element: <SignUp />,
   },
 ]);
 
